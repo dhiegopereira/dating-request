@@ -77,6 +77,7 @@ function goToQuestionInput() {
   currentName = name;
   updateURL();
   document.getElementById('screen-name').style.display = 'none';
+  document.getElementById('screen-question-input').style.display = 'block';
   questionInput.focus();
 }
 
