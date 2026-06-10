@@ -111,13 +111,22 @@ const btnSim = document.getElementById('btn-sim');
 
 let swapped = false;
 
-btnNao.addEventListener('mouseenter', function () {
+function swapButtons() {
   if (!swapped) {
     wrapper.insertBefore(btnNao, btnSim);
   } else {
     wrapper.insertBefore(btnSim, btnNao);
   }
   swapped = !swapped;
+}
+
+// Desktop: hover
+btnNao.addEventListener('mouseenter', swapButtons);
+
+// Mobile: toque (previne o click)
+btnNao.addEventListener('touchstart', function (e) {
+  e.preventDefault();
+  swapButtons();
 });
 
 // ── Tela 2 → Tela 3 ──────────────────────────────────────────
