@@ -26,6 +26,17 @@ const paramQuestion = urlParams.get('question');
 let currentName = paramName || '';
 let currentQuestion = paramQuestion || '';
 
+// ── Atualiza a URL com os parâmetros name e question ──────────
+function updateURL() {
+  const params = new URLSearchParams();
+  if (currentName) params.set('name', currentName);
+  if (currentQuestion) params.set('question', currentQuestion);
+  const newURL = params.toString()
+    ? `${window.location.pathname}?${params.toString()}`
+    : window.location.pathname;
+  window.history.replaceState({}, '', newURL);
+}
+
 // Se veio nome e pergunta pela URL, pula direto para a tela de pergunta
 if (paramName && paramQuestion) {
   document.getElementById('screen-name').style.display = 'none';
@@ -64,8 +75,8 @@ function goToQuestionInput() {
   }
 
   currentName = name;
+  updateURL();
   document.getElementById('screen-name').style.display = 'none';
-  document.getElementById('screen-question-input').style.display = 'block';
   questionInput.focus();
 }
 
@@ -84,6 +95,7 @@ function showQuestion() {
   }
 
   currentQuestion = question;
+  updateURL();
 
   document.getElementById('screen-question-input').style.display = 'none';
   document.getElementById('screen-question').style.display = 'block';
@@ -165,6 +177,7 @@ modalSave.addEventListener('click', () => {
 
   if (newName) currentName = newName;
   if (newQuestion) currentQuestion = newQuestion;
+  updateURL();
 
   // Atualiza a tela de pergunta se já estiver visível
   const screenQuestion = document.getElementById('screen-question');
