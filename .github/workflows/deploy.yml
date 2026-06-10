@@ -55,7 +55,7 @@ jobs:
             --platform=managed \
             --allow-unauthenticated \
             --timeout=300s \
-            --memory=256Mi \
+            --memory=512Mi \
             --cpu=1 \
             --execution-environment=gen2 \
             --cpu-boost
